@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стартапы | ИТ-парк</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: white;
+            background-image: 
+                linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
+            background-size: 40px 80px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a2c82;
+            text-align: center;
+            overflow: hidden;
+            font-weight: 500;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(106, 48, 147, 0.1);
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            color: #000;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        
+        .countdown {
+            font-size: 4.5em;
+            font-weight: 700;
+            margin: 30px 0;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #6a3093;
+            letter-spacing: -2px;
+        }
+        
+        .quote {
+            font-size: 1.5em;
+            line-height: 1.5;
+            margin: 30px 0;
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+            color: #333;
+            font-weight: 400;
+        }
+        
+        .author {
+            font-style: normal;
+            margin-top: 20px;
+            font-size: 1em;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .position {
+            display: block;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .office-icon {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 60px;
+            color: #6a3093;
+        }
+        
+        .icon1 { top: 20px; left: 20px; }
+        .icon2 { bottom: 20px; right: 20px; }
+        .icon3 { top: 50%; right: 30px; transform: translateY(-50%); }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .telegram-btn {
+            border: none;
+            background-color: #2CFE96;
+            color: #000;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .telegram-btn:hover {
+            background-color: #24e085;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h1>Твое послание</h1>
+        
+        <div class="countdown" id="countdown">3</div>
+        
+        <div class="quote-container">
+            <div class="quote" id="quote"></div>
+            <div class="author" id="author"></div>
+        </div>
+        
+        <div class="btn-container">
+            <a href="https://t.me/bi_itpark/441?single" target="_blank" class="telegram-btn" id="telegramBtn">Твой шанс попасть в ИТ-парк</a>
+        </div>
+    </div>
+    
+    <script>
+        const quotes = [
+            {
+                text: "Если вы не готовы рисковать, вы не сможете вырасти. Когда вы растёте, вы понимаете, что не всё работает.",
+                author: "Илон Маск",
+                position: "Основатель Tesla, SpaceX, Neuralink"
+            },
+            {
+                text: "Ваша работа заполнит большую часть жизни, и единственный способ быть по-настоящему удовлетворённым — делать то, что вы считаете великим делом.",
+                author: "Стив Джобс",
+                position: "Сооснователь Apple, Pixar"
+            },
+            {
+                text: "Не бойтесь отказываться от хорошего в пользу великого.",
+                author: "Джефф Безос",
+                position: "Основатель Amazon, Blue Origin"
+            },
+            {
+                text: "Стартап — это переход от неудачи к неудаче без потери энтузиазма.",
+                author: "Уинстон Черчилль",
+                position: "Премьер-министр Великобритании"
+            },
+            {
+                text: "Единственное, что вам нужно для создания успешного стартапа — это хорошая команда, продукт, который действительно нужен людям, и как можно меньше денег.",
+                author: "Пол Грэм",
+                position: "Сооснователь Y Combinator"
+            },
+            {
+                text: "Если вы не делаете ошибок, значит, вы недостаточно быстро принимаете решения.",
+                author: "Марк Цукерберг",
+                position: "Основатель Facebook (Meta)"
+            },
+            {
+                text: "Важно не то, сколько раз вы упали, а то, сколько раз вы поднялись.",
+                author: "Джек Ма",
+                position: "Основатель Alibaba Group"
+            },
+            {
+                text: "Единственный способ выиграть — это учиться быстрее, чем кто-либо другой.",
+                author: "Эрик Райс",
+                position: "Автор метода Lean Startup"
+            },
+            {
+                text: "Инновации отличают лидера от догоняющего.",
+                author: "Стив Джобс",
+                position: "Сооснователь Apple, Pixar"
+            },
+            {
+                text: "Если что-то достаточно важно, вы должны попытаться, даже если вероятный результат — неудача.",
+                author: "Илон Маск",
+                position: "Основатель Tesla, SpaceX, Neuralink"
+            }
+        ];
+        
+        const countdownEl = document.getElementById('countdown');
+        const quoteEl = document.getElementById('quote');
+        const authorEl = document.getElementById('author');
+        
+        function startCountdown() {
+            let count = 3;
+            countdownEl.textContent = count;
+            
+            const timer = setInterval(() => {
+                count--;
+                countdownEl.textContent = count;
+                
+                if (count === 0) {
+                    clearInterval(timer);
+                    showRandomQuote();
+                }
+            }, 1000);
+        }
+        
+        function showRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
+            
+            countdownEl.style.display = 'none';
+            quoteEl.textContent = randomQuote.text;
+            authorEl.innerHTML = `${randomQuote.author}<span class="position">${randomQuote.position}</span>`;
+            
+            quoteEl.style.display = 'block';
+            authorEl.style.display = 'block';
+        }
+        
+        // Начальный отсчет
+        startCountdown();
+    </script>
+</body>
+</html>
